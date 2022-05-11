@@ -18,13 +18,13 @@ The easiest way to figure out how to get data from your camera is to watch the [
 Once the software is installed and configured follow these steps to get the handshake network traffic to appear in Wireshark:
 
 1. [Open Android Studio and setup an AVD](https://developer.android.com/studio/run/managing-avds)
-  i. Once the AVD is running, open the Google Play Store app and install the Little Stars app
-  ii. Make sure to close the Little Stars app before the next step
+  1. Once the AVD is running, open the Google Play Store app and install the Little Stars app
+  2. Make sure to close the Little Stars app before the next step
 2. Turn on your IP camera
-  i. put the camera into Wifi AP mode (some do this automatically, mine do)
-  ii. Find the camera Wifi AP on your laptop or desktop and connect to it
+  1. put the camera into Wifi AP mode (some do this automatically, mine do)
+  2. Find the camera Wifi AP on your laptop or desktop and connect to it
 3. Open Wireshark and begin monitoring your laptop or desktop's Wifi interface
 4. Now return to the AVD from step 1, open the Little Stars app, and watch the network traffic on Wireshark
-  i. Things will move fast in Wireshark, but the AVD probably sent a group of 3 2 byte payload UDP packets to the camera and was promptly flooded by packets from the camera. Those 3 packets correspond to the command list linked above.
+  1. Things will move fast in Wireshark, but the AVD probably sent a group of 3 2 byte payload UDP packets to the camera and was promptly flooded by packets from the camera. Those 3 packets correspond to the command list linked above.
 
 # What Does It Mean?

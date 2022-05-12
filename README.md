@@ -31,7 +31,9 @@ Once the software is installed and configured follow these steps to get the hand
 I don't even really know but its enough to get the camera to talk to us. For my cameras the 3 UDP payloads look like this:
 
 `0x30 0x67` -> CAMERA_IP:8070
+
 `0x30 0x66` -> CAMERA_IP:8070
+
 `0x42 0x76` -> CAMERA_IP:8080
 
 The first byte corresponds to one of the commands from the list that is linked above. `MSG_LAN_SEARCH = 0x30` and `MSG_P2P_RDY = 0x42`. I don't know what the 2nd byte means but that doesn't matter because afterwards the camera showers my python script with packets.

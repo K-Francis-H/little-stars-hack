@@ -38,7 +38,7 @@ I don't even really know but its enough to get the camera to talk to us. For my 
 
 The first byte corresponds to one of the commands from the list that is linked above. `MSG_LAN_SEARCH = 0x30` and `MSG_P2P_RDY = 0x42`. I don't know what the 2nd byte means but that doesn't matter because afterwards the camera showers my python script with packets.
 
-#Now What?
+# Now What?
 That's as far as I got. I'm assuming that the packets the camera has begun spamming me with are video frames. I'm not sure though and they're not particularly big (1472 bytes). There may be another authorization step. From the conversation [here](https://community.home-assistant.io/t/popular-a9-mini-wi-fi-camera-the-ha-challenge/230108) there is likely some kind of weak encryption used. I implemented the encryption algorithm described in that forum in my script and have a test to prove it works, well at least for the text 'Hello World'. So my next step is to try to decrypt and/or interpret video data from the packets or figure out the next step in the protocol if the packets I'm getting are not video frames.
 
-I hope this README and the associated scripts, WIreshark dumps, etc are useful to you. If your camera has a different handshake and you feel up to making a pull request for the script please do so. With a variety of different handshakes implemented this script could become quite useful to a lot of shitty IP camera enjoyers.
+I hope this README and the associated scripts, Wireshark dumps, etc are useful to you. If your camera has a different handshake and you feel up to making a pull request for the script please do so.

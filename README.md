@@ -46,9 +46,10 @@ I hope this README and the associated scripts, Wireshark dumps, etc are useful t
 # Update: I Am Getting Video!
 
 ![An image of a scissors handle](https://raw.githubusercontent.com/K-Francis-H/little-stars-hack/main/img.jpeg)
+
 An image of a scissors handle recieved from the camera via some intermediate version of the `little_stars.py` script.
 
-With some help from a use named purplesky on the conversation mentioned above in the "Now What?" section I was able to combine multiple packets into JPEG images and hand them to the Python Image Library (PIL) to get individual frames. I was then able to use Tkinter to render them. The updated script for my particular camera is `camera_feed.py` 
+With some help from a user named purplesky on the conversation mentioned above in the "Now What?" section I was able to combine multiple packets into JPEG images and hand them to the Python Image Library (PIL) to get individual frames. I was then able to use Tkinter to render them. The updated script for my particular camera is `camera_feed.py` 
 
 It only kinda works, though. In order to actually get frames to render to a Tkinter canvas I have intentionally left a syntax error on line `183` of that file: `se;f.root.update()` ... I'm not sure why exactly but that seems to allow enough time when the exception is being handled to render the frame. Other things like sleeping or increasing/decreasing the UI update callback don't seem to help. No doubt this will only work for some people and most will only get a blank Tkinter window. I'm new to Tkinter and maybe I'd have better luck with a hardware texture in SDL or pygame with which I have a little more familiarity, but might require a more complex application. 
 

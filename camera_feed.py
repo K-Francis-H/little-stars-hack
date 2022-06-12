@@ -91,7 +91,6 @@ MSG_MGM_REMOTE_MANAGEMENT=     0xF8
 HEADER_FMT = '>BB'
 
 
-
 def network_loop():
 	global image_queue
 
@@ -100,6 +99,10 @@ def network_loop():
 	s.bind(('',0))
 
 	camera_initialized = initiate_camera(s)
+	if( not camera_initialized ):
+		print("Unable to initialize camera...")
+		print("Make sure your computer is connected to the camera's WiFi AP")
+		
 
 	frame = bytearray()
 	while camera_initialized:
@@ -171,7 +174,7 @@ class IPCameraWindow():
 		root.update()
 		
 
-		root.after(1000, self.update_canvas)
+		root.after(1, self.update_canvas)
 		self.root = root
 
 	def update_canvas(self):

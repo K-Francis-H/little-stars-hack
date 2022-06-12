@@ -42,3 +42,15 @@ The first byte corresponds to one of the commands from the list that is linked a
 That's as far as I got. I'm assuming that the packets the camera has begun spamming me with are video frames. I'm not sure though and they're not particularly big (1472 bytes). There may be another authorization step. From the conversation [here](https://community.home-assistant.io/t/popular-a9-mini-wi-fi-camera-the-ha-challenge/230108) there is likely some kind of weak encryption used. I implemented the encryption algorithm described in that forum in my script and have a test to prove it works, well at least for the text 'Hello World'. So my next step is to try to decrypt and/or interpret video data from the packets or figure out the next step in the protocol if the packets I'm getting are not video frames.
 
 I hope this README and the associated scripts, Wireshark dumps, etc are useful to you. If your camera has a different handshake and you feel up to making a pull request for the script please do so.
+
+# Update: I Am Getting Video!
+
+![An image of a scissors handle](https://raw.githubusercontent.com/K-Francis-H/little-stars-hack/main/img.jpeg)
+
+An image of a scissors handle recieved from the camera via some intermediate version of the `little_stars.py` script.
+
+With some help from a user named purplesky on the conversation mentioned above in the "Now What?" section I was able to combine multiple packets into JPEG images and hand them to the Python Image Library (PIL) to get individual frames. I was then able to use Tkinter to render them. The updated script for my particular camera is `camera_feed.py` 
+
+It only kinda works, though. In order to actually get frames to render to a Tkinter canvas I have intentionally left a syntax error on line `183` of that file: `se;f.root.update()` ... I'm not sure why exactly but that seems to allow enough time when the exception is being handled to render the frame. Other things like sleeping or increasing/decreasing the UI update callback don't seem to help. No doubt this will only work for some people and most will only get a blank Tkinter window. I'm new to Tkinter and maybe I'd have better luck with a hardware texture in SDL or pygame with which I have a little more familiarity, but might require a more complex application. 
+
+The basic structure of the program seems sound though: A separate thread initiates contact with the camera and begins reieving packets. Once it has a full frame, it creates an image object and pushes it onto a thread-safe queue. Meanwhile, the UI main loop continually runs an update function on a ~100ms timer and checks the thread-safe queue for new images. If a new one is found, it is rendered to the canvas. But apparently with Tkinter its not quite that simple. I'll keep on improving what I have and try to figure out what data is being sent to port 8070, maybe audio?
